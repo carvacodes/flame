@@ -29,6 +29,10 @@
 /*                       */
 /*************************/
 
+html, button {
+  font-size: 13px;
+}
+
 body {
   width: 100vw;
   height: 100vh;
@@ -54,7 +58,6 @@ p, input {
 
 .controls {
   width: 100vw;
-  max-width: 400px;
   margin: 0 auto;
   position: fixed;
   left: 0;
@@ -67,13 +70,33 @@ p, input {
 
 .control-group {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   min-height: 2rem;
   padding: 5px;
   border-bottom: thin solid black;
   background-color: rgba(255, 255, 255, 0.15);
+}
+
+.control-group p {
+  margin-bottom: 5px;;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  position: relative;
+}
+
+.input-group * {
+  margin-right: 3px;
+}
+
+.input-group *:last-child {
+  margin-right: 0;
 }
 
 .slide-container.offscreen {
@@ -88,10 +111,13 @@ p, input {
   color: white;
   font-family: 'Quicksand', sans-serif;
   user-select: none;
+  text-shadow: 0px 0px 3px black;
 }
 
-#menuToggle p {
-  width: 100%;
+#menuToggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #menuToggle:hover, input, button {
@@ -107,8 +133,8 @@ button {
   border-style: none;
   background-color: rgb(111, 17, 155);
   border-radius: 5px;
-  margin-top: 13px;
-  width: 100%;
+  margin-top: 0.8rem;
+  width: 10rem;
   padding: 0.5rem;
 }
 

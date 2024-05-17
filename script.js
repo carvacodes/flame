@@ -38,7 +38,7 @@ window.addEventListener('load', ()=>{
   /*                                          */
   /********************************************/
   function handleTouchMove(e) {
-    // e.preventDefault();
+    e.preventDefault();
     swipeMove.x = e.touches[0].clientX;
     swipeMove.y = e.touches[0].clientY;
 
