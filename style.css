@@ -132,11 +132,17 @@ p, input {
 
 button {
   border-style: none;
-  background-color: rgb(111, 17, 155);
+  background-color: rgb(82, 82, 82);
   border-radius: 5px;
   margin-top: 0.8rem;
   width: 10rem;
   padding: 0.5rem;
+}
+
+button.value-changed {
+  background-color: rgb(28, 209, 98);
+  color: black;
+  text-shadow: 0px 0px 2px rgb(15, 112, 52);
 }
 
 /********************************************/

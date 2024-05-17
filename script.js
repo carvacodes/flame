@@ -184,14 +184,20 @@ window.addEventListener('load', ()=>{
       input.value = input.getAttribute('data-default-value');
       handleInputChange(input);
     }
+    element.classList.remove('value-changed');
   }
 
   // handler for changes to input[range] elements
   function handleInputChange(element) {
+    // grab the input element's data-css-var attribute, which contains the css variable to change
     let cssVar = element.getAttribute('data-css-var');
     let styleValue = element.value;
     if (cssVar == '--flame-flicker-strength') { styleValue += '%'; }
-    docRoot.style.setProperty(cssVar, styleValue);
+    docRoot.style.setProperty(cssVar, styleValue);    // the :root pseudo-element contains the rules to modify
+
+    // if a value is changed, light up the "Reset to Default(s)" button
+    let siblingButton = element.parentElement.parentElement.querySelector('button');
+    if (!siblingButton.classList.contains('value-changed')) { siblingButton.classList.add('value-changed'); }
   }
 
   /****************************************/
