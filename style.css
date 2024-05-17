@@ -107,11 +107,22 @@ p, input {
   transform: translateY(0px);
 }
 
+.slide-container.onscreen::after {
+  content: '\2716';
+  position: absolute;
+  top: -2rem;
+  right: 1rem;
+}
+
 .controls, .controls p, .controls button, .controls input, .controls label {
   color: white;
   font-family: 'Quicksand', sans-serif;
   user-select: none;
   text-shadow: 0px 0px 3px black;
+}
+
+.controls p {
+  font-weight: bold;
 }
 
 #menuToggle {
@@ -123,6 +134,10 @@ p, input {
 
 #menuToggle:hover, input, button {
   cursor: pointer;
+}
+
+#menuToggle p {
+  margin: initial;
 }
 
 .input-elements input {
