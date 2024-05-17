@@ -118,6 +118,7 @@ p, input {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  z-index: 1000;
 }
 
 #menuToggle:hover, input, button {

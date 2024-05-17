@@ -38,53 +38,67 @@ window.addEventListener('load', ()=>{
   /*                                          */
   /********************************************/
   function handleTouchMove(e) {
-    e.preventDefault();
     swipeMove.x = e.touches[0].clientX;
     swipeMove.y = e.touches[0].clientY;
 
     let target = e.changedTouches[0].target;
 
+    // for carvacodes presentation of this project, touchmove events need to avoid triggering a scroll (so, preventDefault)
+    // however, input range dragging still needs to be allowed through. this variable will help enable that
+    let inputChanging = false;
+
     // swipe logic
-    // first check for sliding status. if sliding, update the menu position right away
+    // check for sliding status. if sliding, update the menu position right away
     if (sliding) {
       let currentY = e.changedTouches[0].clientY;
       // translateY takes into account the height of the menu and the nav bar and adjusts by clientY
       // it also sets the maximum adjustment to the full height of the menu + nav bar
       slideContainer.style.transform = `translateY(${Math.min((-606 - navToggleMargin) + currentY, 0)}px)`;
-      return;
     }
 
-    // first check for mostly-x swipes; those are either input changes, or they can be ignored
+    // check for mostly-x swipes; those are either input changes, or they can be ignored
+    // events should be allowed through button and input movement
     let swipeCheck = checkForSwipe();
-    if (target.tagName == 'INPUT') {
-      // the user is changing an input; no movement, but process their input change right away
+    if (target.tagName == 'BUTTON') {
+      sliding = false;
+    } else if (target.tagName == 'INPUT') {
+      // the user is changing an input, so allow the default behavior of a touchmove event (see if statement at the end)
+      // also, there's no movement, but process their input change right away
+      inputChanging = true;
       sliding = false;
       handleInputChange(target);
-    } else if (Math.abs(swipeCheck.x) <= 100 && Math.abs(swipeCheck.y) >= 35) {
+    }
+
+    if (Math.abs(swipeCheck.x) <= 100 && Math.abs(swipeCheck.y) >= 35) {
       // here, if the user has swiped mostly in the Y direction and not the X direction,
       // toggle menu visibility (unless the user is swiping in a direction that requires no movement)
-      if ((slideContainer.classList.contains('offscreen') && swipeCheck.y < 0) || 
-          (slideContainer.classList.contains('onscreen') && swipeCheck.y > 0)) {
+      if ((slideContainer.classList.contains('offscreen') && swipeCheck.y >= 0) || 
+          (slideContainer.classList.contains('onscreen') && swipeCheck.y <= 0)) {
         // the user is swiping up while the menu is hidden or down while it's onscreen; no movement
-        return;
+        sliding = true;
       }
-      sliding = true;
+    }
+
+    // if the user isn't interacting with an input, avoid normal bubbling and handling of touchmove events to prevent srolling
+    if (!inputChanging) {
+      e.stopPropagation();
+      e.preventDefault();
     }
   }
 
   function handleTouchStart(e) {
+    e.stopPropagation();
     let target = e.changedTouches[0].target;
 
     swipeStart.x = e.touches[0].clientX;
     swipeStart.y = e.touches[0].clientY;
     
-    // if a touch starts on either the menuToggle element or its internal paragraph, toggle the menu
-    if (target.id == 'menuToggle' || (target.tagName == 'P' && target.innerText == 'Controls')) {
-      toggleMenu(e);
-    }
+    // this event ends up being the same for touchstart/end, but it should be repeated in both (similar to mousedown/up)
+    handleTouchEnd(e);
   }
 
   function handleTouchEnd(e) {
+    e.stopPropagation();
     let lastY = e.changedTouches[0].clientY;
     let target = e.changedTouches[0].target;
 
@@ -132,7 +146,7 @@ window.addEventListener('load', ()=>{
     let target = e.target;
 
     // handle changes to inputs and buttons first, then menu toggling
-    // we can reuse the mouse up logic here, but we do want to listen for both
+    // we can reuse the mouse up logic here, but we do want to listen for both (similar to touchstart/end)
     handleMouseUp(e);
 
     if (target.id == 'menuToggle' || (target.tagName == 'P' && target.innerText == 'Controls')) {
@@ -195,7 +209,6 @@ window.addEventListener('load', ()=>{
   // helper function for accurately toggling class. slightly more reliable than classList.toggle(),
   // since this always performs the contains() check first, as opposed to naively changing every time
   function toggleMenu(e) {
-    e.preventDefault();
     if (slideContainer.classList.contains('offscreen')) {
       slideContainer.classList.add('onscreen');
       slideContainer.classList.remove('offscreen');
