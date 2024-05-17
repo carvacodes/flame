@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="controls" id="controlMenu">
+            <div id="menuToggle" class="control-group collapsed">
+                <p>Controls</p>
+            </div>
+            <div class="slide-container offscreen" id="slideContainer">
+                <div class="control-group">
+                    <p>Flame Body</p>
+                    <div class="input-elements">
+                        <label for="flameColorRed">Red</label><input type="range" min="0" max="255" step="1" value="224" data-default-value="224" data-css-var="--flame-color-r" id="flameColorRed">
+                        <label for="flameColorGreen">Green</label><input type="range" min="0" max="255" step="1" value="204" data-default-value="204" data-css-var="--flame-color-g" id="flameColorGreen">
+                        <label for="flameColorBlue">Blue</label><input type="range" min="0" max="255" step="1" value="15" data-default-value="15" data-css-var="--flame-color-b" id="flameColorBlue">
+                        <label for="flameColorBrightness">Brightness</label><input type="range" min="0" max="1" step="0.01" value="1" data-default-value="1" data-css-var="--flame-brightness" id="flameColorBrightness">
+                        <button class="resetToDefault">Reset to Defaults</button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <p>Flame Root</p>
+                    <div class="input-elements">
+                        <label for="flameRootColorRed">Red</label><input type="range" min="0" max="255" step="1" value="224" data-default-value="224" data-css-var="--flame-root-color-r" id="flameRootColorRed">
+                        <label for="flameRootColorGreen">Green</label><input type="range" min="0" max="255" step="1" value="109" data-default-value="109" data-css-var="--flame-root-color-g" id="flameRootColorGreen">
+                        <label for="flameRootColorBlue">Blue</label><input type="range" min="0" max="255" step="1" value="15" data-default-value="15" data-css-var="--flame-root-color-b" id="flameRootColorBlue">
+                        <label for="flameRootColorBrightness">Brightness</label><input type="range" min="0" max="1" step="0.01" value="1" data-default-value="1" data-css-var="--flame-root-brightness" id="flameRootColorBrightness">
+                        <button class="resetToDefault">Reset to Defaults</button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <p>Flame Flicker</p>
+                    <div class="input-elements">
+                        <label for="flameFlickerColorRed">Red</label><input type="range" min="0" max="255" step="1" value="141" data-default-value="141" data-css-var="--flame-flicker-color-r" id="flameFlickerColorRed">
+                        <label for="flameFlickerColorGreen">Green</label><input type="range" min="0" max="255" step="1" value="3" data-default-value="3" data-css-var="--flame-flicker-color-g" id="flameFlickerColorGreen">
+                        <label for="flameFlickerColorBlue">Blue</label><input type="range" min="0" max="255" step="1" value="3" data-default-value="3" data-css-var="--flame-flicker-color-b" id="flameFlickerColorBlue">
+                        <label for="flameFlickerStrength">Flicker Strength</label><input type="range" min="0" max="100" step="0.1" value="45" data-default-value="45" data-css-var="--flame-flicker-strength" id="flameFlickerStrength">
+                        <button class="resetToDefault">Reset to Defaults</button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <p>Animation Length</p>
+                    <div class="input-elements">
+                        <label for="animationLength">Animation Length</label><input type="range" min="0.3" max="5" step="0.01" value="1" data-default-value="1" data-css-var="--animation-length" id="animationLength">
+                        <button class="resetToDefault">Reset to Default</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="flame">
+                <div class="flame-body"></div>
+                <div class="flame-body"></div>
+                <div class="flame-body"></div>
+                <div class="flame-body"></div>
+                <div class="flame-body"></div>
+            </div>
+        </div>
+        <script src="./script.js"></script>
+    </body>
+</html>
